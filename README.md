@@ -4,7 +4,7 @@ A VCDO based 6 voice Polysynth using Electrid Druid VCDO1 chips.
 
 This is my first attempt at a polysynth and it took me several years as its a learning curve with all of these things.
 
-It started out with 12 Electric Druid VCDO1 chips as the osillators with the intention of just replacing the Crumar Stratus organ voice section with something a little more synth based. But eventually I realized that the whole synth should be replaced with new oscillators, filters, LFO, evnvelopes etc. I tried switching to AS3340 CEM based oscillators but I couldn't keep the tuning stable for 12 voices and I am not competent enough to write an autotune routine, so I went back to more "stable" VCDOs.
+It started out with 12 Electric Druid VCDO1 chips as the osillators with the intention of just replacing the Crumar Stratus organ voice section with something a little more synth based. But eventually I realized that the whole synth should be replaced with new oscillators, filters, LFO, evnvelopes etc. I tried switching to AS3340 CEM based oscillators but I couldn't keep the tuning stable for 12 voices and I am not competent enough to write an autotune routine, so I went back to more "stable" VCDOs. I then used the VCDO hack from Fitzgreyve that improves the VCDO stability, moves the waveforms around to make the banks more usable. There are some sync and detune options that I did not use for these VCDOs, the hack is linked below.
 
 The synth programs are controlled by a Teensy 3.6 which takes care of all program parameters, screen etc. The oscillators are controlled by my own 6 voice poly MIDI to CV converter and that takes care of the MIDI in and usbMIDI.
 
@@ -29,7 +29,7 @@ https://youtu.be/aCucBx5niDk?si=8zFvPJX8TTVfAv6C
 
 I have no schematics for this as such as it was built over many years and mostly written down in a notepad which needs translating to real schematics, but I generally followed the datasheets for the Electric Druid chips and I will link all the sites I used to develop the synth.
 
-https://fitzgreyve2.blogspot.com
+https://fitzgreyve2.blogspot.com/p/fitzgreyve-alternate-software.html
 
 https://github.com/craigyjp/16bit-MIDI-to-CV-polyphonic-converter
 
