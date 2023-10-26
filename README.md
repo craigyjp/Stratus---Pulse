@@ -24,11 +24,17 @@ The synth programs are controlled by a Teensy 3.6 which takes care of all progra
 I have no schematics for this as such as it was built over many years and mostly written down in a notepad which needs translating to real schematics, but I generally followed the datasheets for the Electric Druid chips and I will link all the sites I used to develop the synth.
 
 https://fitzgreyve2.blogspot.com
+
 https://github.com/craigyjp/16bit-MIDI-to-CV-polyphonic-converter
+
 https://electricdruid.net/multimode-filters-part-2-pole-mixing-filters/
+
 https://electricdruid.net/product/vcdo-wavetable-oscillator/
+
 https://electricdruid.net/product/noise2-white-pink-generator/
+
 https://electricdruid.net/product/taplfo3/
+
 https://electricdruid.net/product/envgen8/
 
 
