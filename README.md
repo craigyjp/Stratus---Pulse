@@ -8,6 +8,8 @@ It started out with 12 Electric Druid VCDO1 chips as the osillators with the int
 
 The synth programs are controlled by a Teensy 3.6 which takes care of all program parameters, screen etc. The oscillators are controlled by my own 6 voice poly MIDI to CV converter and that takes care of the MIDI in and usbMIDI.
 
+![Synth](photos/synth.jpg)
+
 # Final specs are as follows:
 
 * 6 voice polyphonic
@@ -20,6 +22,10 @@ The synth programs are controlled by a Teensy 3.6 which takes care of all progra
 * Bit crush to destroy the oscillators.
 * 999 Memories.
 * MIDI and usbMIDI connections.
+
+# How it sounds.
+
+https://youtu.be/aCucBx5niDk?si=8zFvPJX8TTVfAv6C
 
 I have no schematics for this as such as it was built over many years and mostly written down in a notepad which needs translating to real schematics, but I generally followed the datasheets for the Electric Druid chips and I will link all the sites I used to develop the synth.
 
