@@ -17,7 +17,7 @@ The synth programs are controlled by a Teensy 3.6 which takes care of all progra
 * 16 waveform LFO with delay and slope as per the original Stratus and mono/multi trigger using the Electric Druid Taplfo3d
 * Noise source of White/Pink using the Electric Druid Noise2
 * Polyphonic glide
-* AS3320 pole mixing filters based on the Matrix 12 filters.
+* AS3320 pole mixing filters based on the Matrix 12 filters. This gives 16 filter variations in total including LP, HP, BP, AP, Notch.
 * 3 sets of envelope generators using the Electric Druid EnvGen8c, looping on the Filter evnvelope and velocity available to all.
 * Bit crush to destroy the oscillators.
 * 999 Memories.
