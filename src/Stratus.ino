@@ -121,9 +121,11 @@ void setup() {
 
   octoswitch.begin(PIN_DATA, PIN_LOAD, PIN_CLK);
   octoswitch.setCallback(onButtonPress);
+  octoswitch.setIgnoreAfterHold(25, true);
 
   srp.begin(OUT_DATA, OUT_CLK, OUT_LATCH);
-
+  srpanel.set(EFFECT_LED, LOW);
+  srpanel.set(LFO_LED, HIGH);
   recallPatch(patchNo);  //Load first patch
 }
 
@@ -631,6 +633,14 @@ void updateMonoMulti() {
   }
 }
 
+void updateEffects() {
+  if (effects) {
+    showCurrentParameterPage("Effects", "On");
+  } else {
+    showCurrentParameterPage("LFO Control", "On");
+  }
+}
+
 void updateosc1EGinv() {
   if (osc1EGinv == 0) {
     showCurrentParameterPage("Osc1 EG Invert", "Off");
@@ -654,6 +664,377 @@ void updateosc2EGon() {
     srp.writePin(OSC2_EG_OUT, HIGH);
   }
 }
+
+void updatepot1() {
+  switch (internal) {
+    case 1:
+      switch (effectNumber) {
+        case 0:
+          showCurrentParameterPage("Reverb Mix", int(pot1str));
+          break;
+
+        case 1:
+          showCurrentParameterPage("Reverb Mix", int(pot1str));
+          break;
+
+        case 2:
+          showCurrentParameterPage("Reverb Mix", int(pot1str));
+          break;
+
+        case 3:
+          showCurrentParameterPage("Pitch", int(pot1str));
+          break;
+
+        case 4:
+          showCurrentParameterPage("Pitch", int(pot1str));
+          break;
+
+        case 5:
+          showCurrentParameterPage("-", int(pot1str));
+          break;
+
+        case 6:
+          showCurrentParameterPage("Reverb Time", int(pot1str));
+          break;
+
+        case 7:
+          showCurrentParameterPage("Reverb Time", int(pot1str));
+          break;
+      }
+      break;
+
+    case 0:
+      switch (effectNumber) {
+        case 0:
+          showCurrentParameterPage("Phaser Rate", int(pot1str));
+          break;
+
+        case 1:
+          showCurrentParameterPage("Flanger Rate", int(pot1str));
+          break;
+
+        case 2:
+          showCurrentParameterPage("Delay 1", int(pot1str));
+          break;
+
+        case 3:
+          showCurrentParameterPage("Delay Time", int(pot1str));
+          break;
+
+        case 4:
+          showCurrentParameterPage("Low Pass", int(pot1str));
+          break;
+
+        case 5:
+          showCurrentParameterPage("Phaser Rate", int(pot1str));
+          break;
+
+        case 6:
+          showCurrentParameterPage("Delay", int(pot1str));
+          break;
+
+        case 7:
+          showCurrentParameterPage("Intensity", int(pot1str));
+          break;
+      }
+      break;
+  }
+}
+
+void updatepot2() {
+    switch (internal) {
+    case 1:
+      switch (effectNumber) {
+        case 0:
+          showCurrentParameterPage("Chorus Rate", int(pot2str));
+          break;
+
+        case 1:
+          showCurrentParameterPage("Flange Rate", int(pot2str));
+          break;
+
+        case 2:
+          showCurrentParameterPage("Trem Rate", int(pot2str));
+          break;
+
+        case 3:
+          showCurrentParameterPage("-", int(pot2str));
+          break;
+
+        case 4:
+          showCurrentParameterPage("Echo Delay", int(pot2str));
+          break;
+
+        case 5:
+          showCurrentParameterPage("-", int(pot2str));
+          break;
+
+        case 6:
+          showCurrentParameterPage("HF Filter", int(pot2str));
+          break;
+
+        case 7:
+          showCurrentParameterPage("HF Filter", int(pot2str));
+          break;
+      }
+      break;
+
+    case 0:
+      switch (effectNumber) {
+        case 0:
+          showCurrentParameterPage("Phaser Depth", int(pot2str));
+          break;
+
+        case 1:
+          showCurrentParameterPage("Flanger Depth", int(pot2str));
+          break;
+
+        case 2:
+          showCurrentParameterPage("Delay 2", int(pot2str));
+          break;
+
+        case 3:
+          showCurrentParameterPage("Flange LFO", int(pot2str));
+          break;
+
+        case 4:
+          showCurrentParameterPage("High Pass", int(pot2str));
+          break;
+
+        case 5:
+          showCurrentParameterPage("Phaser Depth", int(pot2str));
+          break;
+
+        case 6:
+          showCurrentParameterPage("Mix", int(pot2str));
+          break;
+
+        case 7:
+          showCurrentParameterPage("Rate", int(pot2str));
+          break;
+      }
+      break;
+  }
+}
+
+void updatepot3() {
+    switch (internal) {
+    case 1:
+      switch (effectNumber) {
+        case 0:
+          showCurrentParameterPage("Chorus Mix", int(pot3str));
+          break;
+
+        case 1:
+          showCurrentParameterPage("Flange Mix", int(pot3str));
+          break;
+
+        case 2:
+          showCurrentParameterPage("Trem Mix", int(pot3str));
+          break;
+
+        case 3:
+          showCurrentParameterPage("-", int(pot3str));
+          break;
+
+        case 4:
+          showCurrentParameterPage("Echo Mix", int(pot3str));
+          break;
+
+        case 5:
+          showCurrentParameterPage("-", int(pot3str));
+          break;
+
+        case 6:
+          showCurrentParameterPage("LF Filter", int(pot3str));
+          break;
+
+        case 7:
+          showCurrentParameterPage("LF Filter", int(pot3str));
+          break;
+      }
+      break;
+
+    case 0:
+      switch (effectNumber) {
+        case 0:
+          showCurrentParameterPage("Feedback", int(pot3str));
+          break;
+
+        case 1:
+          showCurrentParameterPage("Feedback", int(pot3str));
+          break;
+
+        case 2:
+          showCurrentParameterPage("Delay 3", int(pot3str));
+          break;
+
+        case 3:
+          showCurrentParameterPage("Feedback", int(pot3str));
+          break;
+
+        case 4:
+          showCurrentParameterPage("Volume", int(pot3str));
+          break;
+
+        case 5:
+          showCurrentParameterPage("Feedback", int(pot3str));
+          break;
+
+        case 6:
+          showCurrentParameterPage("Volume", int(pot3str));
+          break;
+
+        case 7:
+          showCurrentParameterPage("Mix", int(pot3str));
+          break;
+      }
+      break;
+  }
+}
+
+void updatemix() {
+  showCurrentParameterPage("Effect Mix", int(mixstr));
+}
+
+void updateinternal() {
+  switch (internal) {
+    case 1:
+      srp.writePin(INT_EXT, LOW);
+      break;
+
+    case 0:
+      srp.writePin(INT_EXT, HIGH);
+      break;
+  }
+  updateeffectNumber();
+}
+
+void updateeffectNumber() {
+  switch (internal) {
+    case 1:
+      switch (effectNumber) {
+        case 0:
+          FV1effect = "Chorus Rev";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 1:
+          FV1effect = "Flange Rev";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 2:
+          FV1effect = "Tremelo Rev";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 3:
+          FV1effect = "Pitch Shift";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 4:
+          FV1effect = "Pitch Echo";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+
+        case 5:
+          FV1effect = "No Effect";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+
+        case 6:
+          FV1effect = "Reverb 1";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+
+        case 7:
+          FV1effect = "Reverb 2";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+      }
+      break;
+
+    case 0:
+      switch (effectNumber) {
+        case 0:
+          FV1effect = "Phaser Bass";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 1:
+          FV1effect = "Flanger Bass";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 2:
+          FV1effect = "Triple Delay";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 3:
+          FV1effect = "6 Tap Delay";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, LOW);
+          break;
+
+        case 4:
+          FV1effect = "Cabinet Sim";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+
+        case 5:
+          FV1effect = "Parallax";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, LOW);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+
+        case 6:
+          FV1effect = "Choir Saw";
+          srp.writePin(EFFECT_S0, LOW);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+
+        case 7:
+          FV1effect = "Spacedash";
+          srp.writePin(EFFECT_S0, HIGH);
+          srp.writePin(EFFECT_S1, HIGH);
+          srp.writePin(EFFECT_S2, HIGH);
+          break;
+      }
+      break;
+  }
+  showCurrentParameterPage("Effect", FV1effect);
+}
+
 void updateGlideTime() {
   showCurrentParameterPage("Glide Time", int(GlideTimestr));
 }
@@ -1185,6 +1566,11 @@ void myControlChange(byte channel, byte control, int value) {
       updateMonoMulti();
       break;
 
+    case CCeffects:
+      value > 0 ? effects = 1 : effects = 0;
+      updateEffects();
+      break;
+
     case CCosc1EGinv:
       value > 0 ? osc1EGinv = 1 : osc1EGinv = 0;
       updateosc1EGinv();
@@ -1205,9 +1591,46 @@ void myControlChange(byte channel, byte control, int value) {
       updateoctavedown();
       break;
 
+    case CCpot1:
+      pot1 = value;
+      pot1str = map(value, 0, 1023, 0, 127);
+      updatepot1();
+      break;
+
+    case CCpot2:
+      pot2 = value;
+      pot2str = map(value, 0, 1023, 0, 127);
+      updatepot2();
+      break;
+
+    case CCpot3:
+      pot3 = value;
+      pot3str = map(value, 0, 1023, 0, 127);
+      updatepot3();
+      break;
+
+    case CCeffectNumber:
+      effectNumber = map(value, 0, 1023, 0, 7);
+      effectNumberstr = map(value, 0, 1023, 0, 7);
+      updateeffectNumber();
+      break;
+
+    case CCmix:
+      mix = value;
+      mixa = mix;
+      mixb = map(value, 0, 1023, 1023, 0);
+      mixstr = map(value, 0, 1023, 0, 127);
+      updatemix();
+      break;
+
+    case CCinternal:
+      internal = map(value, 0, 1023, 0, 1);
+      updateinternal();
+      break;
+
     case CCGlideTime:
       GlideTime = value;
-      GlideTimestr = int(value / 8);
+      GlideTimestr = map(value, 0, 1023, 0, 127);
       updateGlideTime();
       break;
 
@@ -1225,7 +1648,7 @@ void myControlChange(byte channel, byte control, int value) {
 
     case CCEGlevel:
       EGlevel = value;
-      EGlevelstr = int(value / 8);
+      EGlevelstr = map(value, 0, 1023, 0, 127);
       updateEGlevel();
       break;
 
@@ -1237,7 +1660,7 @@ void myControlChange(byte channel, byte control, int value) {
 
     case CCLfoSlope:
       LfoSlope = value;
-      LfoSlopestr = int(value / 8);
+      LfoSlopestr = map(value, 0, 1023, 0, 127);
       updateLfoSlope();
       break;
 
@@ -1249,7 +1672,7 @@ void myControlChange(byte channel, byte control, int value) {
 
     case CCfilterRes:
       filterRes = value;
-      filterResstr = int(value / 8);
+      filterResstr = map(value, 0, 1023, 0, 127);
       updatefilterRes();
       break;
 
@@ -1279,7 +1702,7 @@ void myControlChange(byte channel, byte control, int value) {
 
     case CCLfoDepth:
       LfoDepth = value;
-      LfoDepthstr = value / 8;  // for display
+      LfoDepthstr = map(value, 0, 1023, 0, 127);
       updateLfoDepth();
       break;
 
@@ -1303,25 +1726,25 @@ void myControlChange(byte channel, byte control, int value) {
 
     case CCosc1SubLevel:
       osc1SubLevel = value;
-      osc1SubLevelstr = value / 8;  // for display
+      osc1SubLevelstr = map(value, 0, 1023, 0, 127);  // for display
       updateosc1SubLevel();
       break;
 
     case CCosc1MainLevel:
       osc1MainLevel = value;
-      osc1MainLevelstr = value / 8;  // for display
+      osc1MainLevelstr = map(value, 0, 1023, 0, 127);  // for display
       updateosc1MainLevel();
       break;
 
     case CCosc2SubLevel:
       osc2SubLevel = value;
-      osc2SubLevelstr = value / 8;  // for display
+      osc2SubLevelstr = map(value, 0, 1023, 0, 127);  // for display
       updateosc2SubLevel();
       break;
 
     case CCosc2MainLevel:
       osc2MainLevel = value;
-      osc2MainLevelstr = value / 8;  // for display
+      osc2MainLevelstr = map(value, 0, 1023, 0, 127);  // for display
       updateosc2MainLevel();
       break;
 
@@ -1379,7 +1802,7 @@ void myControlChange(byte channel, byte control, int value) {
 
     case CCmodwheel:
       modWheelLevel = value;
-      modWheelLevelstr = value / 8;
+      modWheelLevelstr = map(value, 0, 1023, 0, 127);
       updatemodWheel();
       break;
 
@@ -1494,6 +1917,13 @@ void setCurrentPatchData(String data[]) {
   pitchVelo = data[65].toInt();
   filterVelo = data[66].toInt();
   FilterEnvPatch = data[67].toInt();
+  effectNumber = data[68].toInt();
+  pot1 = data[69].toInt();
+  pot2 = data[70].toInt();
+  pot3 = data[71].toInt();
+  mixa = data[72].toInt();
+  mixb = data[73].toInt();
+  internal = data[74].toInt();
 
   //Switches
 
@@ -1517,6 +1947,8 @@ void setCurrentPatchData(String data[]) {
   updateosc1EGinv();
   updateosc2EGon();
   updatelfoAlt();
+  updateinternal();
+  updateeffectNumber();
 
   //  getFilterEnv();
 
@@ -1528,7 +1960,18 @@ void setCurrentPatchData(String data[]) {
 }
 
 String getCurrentPatchData() {
-  return patchName + "," + String(noiseLevel) + "," + String(octave1) + "," + String(unisonSW) + "," + String(GlideTime) + "," + String(volumeControl) + "," + String(ampVelo) + "," + String(LfoDelay) + "," + String(pitchEGlevel) + "," + String(filterRes) + "," + String(filterCutoff) + "," + String(osc2SubWave) + "," + String(osc1MainWave) + "," + String(osc2MainWave) + "," + String(LfoDepth) + "," + String(osc2SubLevel) + "," + String(osc2MainLevel) + "," + String(octave2) + "," + String(lfoAlt) + "," + String(glide) + "," + String(LfoRate) + "," + String(bitCrush) + "," + String(osc1SubLevel) + "," + String(osc1MainLevel) + "," + String(osc1SubWave) + "," + String(ampAttack) + "," + String(ampDecay) + "," + String(ampSustain) + "," + String(ampRelease) + "," + String(LFOWaveform) + "," + String(MasterTune) + "," + String(lfoDestVCO) + "," + String(monoMulti) + "," + String(lfoMult) + "," + String(filterType) + "," + String(filterKeyTrack) + "," + String(osc1Detune) + "," + String(LfoSlope) + "," + String(PitchBendLevel) + "," + String(lfoDestVCF) + "," + String(lfoDestVCA) + "," + String(filterA) + "," + String(filterB) + "," + String(filterC) + "," + String(octave_select1) + "," + String(octave_select2) + "," + String(modWheelLevel) + "," + String(filterEGinv) + "," + String(filterLoop) + "," + String(filterPole) + "," + String(osc1EGinv) + "," + String(osc2EGon) + "," + String(pitchAttack) + "," + String(pitchDecay) + "," + String(pitchSustain) + "," + String(pitchRelease) + "," + String(filterAttack) + "," + String(filterDecay) + "," + String(filterSustain) + "," + String(filterRelease) + "," + String(filterEGlevel) + "," + String(ampEGlevel) + "," + String(pitchEG) + "," + String(filterEG) + "," + String(ampEG) + "," + String(pitchVelo) + "," + String(filterVelo) + "," + String(FilterEnvPatch);
+  return patchName + "," + String(noiseLevel) + "," + String(octave1) + "," + String(unisonSW) + "," + String(GlideTime) + "," + String(volumeControl) + "," + String(ampVelo)
+         + "," + String(LfoDelay) + "," + String(pitchEGlevel) + "," + String(filterRes) + "," + String(filterCutoff) + "," + String(osc2SubWave) + "," + String(osc1MainWave)
+         + "," + String(osc2MainWave) + "," + String(LfoDepth) + "," + String(osc2SubLevel) + "," + String(osc2MainLevel) + "," + String(octave2) + "," + String(lfoAlt)
+         + "," + String(glide) + "," + String(LfoRate) + "," + String(bitCrush) + "," + String(osc1SubLevel) + "," + String(osc1MainLevel) + "," + String(osc1SubWave)
+         + "," + String(ampAttack) + "," + String(ampDecay) + "," + String(ampSustain) + "," + String(ampRelease) + "," + String(LFOWaveform) + "," + String(MasterTune)
+         + "," + String(lfoDestVCO) + "," + String(monoMulti) + "," + String(lfoMult) + "," + String(filterType) + "," + String(filterKeyTrack) + "," + String(osc1Detune)
+         + "," + String(LfoSlope) + "," + String(PitchBendLevel) + "," + String(lfoDestVCF) + "," + String(lfoDestVCA) + "," + String(filterA) + "," + String(filterB)
+         + "," + String(filterC) + "," + String(octave_select1) + "," + String(octave_select2) + "," + String(modWheelLevel) + "," + String(filterEGinv) + "," + String(filterLoop)
+         + "," + String(filterPole) + "," + String(osc1EGinv) + "," + String(osc2EGon) + "," + String(pitchAttack) + "," + String(pitchDecay) + "," + String(pitchSustain) + "," + String(pitchRelease)
+         + "," + String(filterAttack) + "," + String(filterDecay) + "," + String(filterSustain) + "," + String(filterRelease) + "," + String(filterEGlevel) + "," + String(ampEGlevel) + "," + String(pitchEG)
+         + "," + String(filterEG) + "," + String(ampEG) + "," + String(pitchVelo) + "," + String(filterVelo) + "," + String(FilterEnvPatch)
+         + "," + String(effectNumber) + "," + String(pot1) + "," + String(pot2) + "," + String(pot3) + "," + String(mixa) + "," + String(mixb) + "," + String(internal);
 }
 
 
@@ -1603,10 +2046,18 @@ void checkMux() {
       //        myControlChange(midiChannel, CCspare, mux2Read);
       //        break;
       case MUX2_LFOWaveform:
-        myControlChange(midiChannel, CCLFOWaveform, mux2Read);
+        if (effects) {
+          myControlChange(midiChannel, CCeffectNumber, mux2Read);
+        } else {
+          myControlChange(midiChannel, CCLFOWaveform, mux2Read);
+        }
         break;
       case MUX2_lfoAlt:
-        myControlChange(midiChannel, CClfoAlt, mux2Read);
+        if (effects) {
+          myControlChange(midiChannel, CCinternal, mux2Read);
+        } else {
+          myControlChange(midiChannel, CClfoAlt, mux2Read);
+        }
         break;
       case MUX2_lfoMult:
         myControlChange(midiChannel, CClfoMult, mux2Read);
@@ -1636,16 +2087,32 @@ void checkMux() {
         myControlChange(midiChannel, CCMasterTune, mux2Read);
         break;
       case MUX2_LfoRate:
-        myControlChange(midiChannel, CCLfoRate, mux2Read);
+        if (effects) {
+          myControlChange(midiChannel, CCpot1, mux2Read);
+        } else {
+          myControlChange(midiChannel, CCLfoRate, mux2Read);
+        }
         break;
       case MUX2_LfoSlope:
-        myControlChange(midiChannel, CCLfoSlope, mux2Read);
+        if (effects) {
+          myControlChange(midiChannel, CCpot2, mux2Read);
+        } else {
+          myControlChange(midiChannel, CCLfoSlope, mux2Read);
+        }
         break;
       case MUX2_LfoDelay:
-        myControlChange(midiChannel, CCLfoDelay, mux2Read);
+        if (effects) {
+          myControlChange(midiChannel, CCpot3, mux2Read);
+        } else {
+          myControlChange(midiChannel, CCLfoDelay, mux2Read);
+        }
         break;
       case MUX2_LfoDepth:
-        myControlChange(midiChannel, CCLfoDepth, mux2Read);
+        if (effects) {
+          myControlChange(midiChannel, CCmix, mux2Read);
+        } else {
+          myControlChange(midiChannel, CCLfoDepth, mux2Read);
+        }
         break;
     }
   }
@@ -1684,14 +2151,17 @@ void writeDACs() {
           setVoltage(CHIP_SEL1, 0, 1, int(noiseLevel * 2));
           setVoltage(CHIP_SEL1, 1, 1, int(osc2SubLevel * 1));
           break;
+
         case 1:  // 2Volt
           setVoltage(CHIP_SEL1, 0, 1, int(osc2MainLevel * 1));
           setVoltage(CHIP_SEL1, 1, 1, int(LfoDepth * 2));
           break;
+
         case 2:  // 2Volt
           setVoltage(CHIP_SEL1, 0, 1, 0);
           setVoltage(CHIP_SEL1, 1, 1, int(PitchBendLevel * 2));
           break;
+
         case 3:  // 2Volt
           setVoltage(CHIP_SEL1, 0, 1, int(osc1SubLevel * 1));
           setVoltage(CHIP_SEL1, 1, 1, int(osc1MainLevel * 1));
@@ -1701,14 +2171,17 @@ void writeDACs() {
           setVoltage(CHIP_SEL1, 0, 1, int(modWheelLevel * 2));
           setVoltage(CHIP_SEL1, 1, 1, int(volumeControl * 1.25));
           break;
+
         case 5:  // 2Volt
-          setVoltage(CHIP_SEL1, 0, 1, 0);
-          setVoltage(CHIP_SEL1, 1, 1, 0);
+          setVoltage(CHIP_SEL1, 0, 1, int(mixa * 2));
+          setVoltage(CHIP_SEL1, 1, 1, int(mixb * 2));
           break;
+
         case 6:
           setVoltage(CHIP_SEL1, 0, 1, int(ampEGlevel * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(MasterTune * 2.43));
           break;
+
         case 7:
           setVoltage(CHIP_SEL1, 0, 1, int(osc1Detune * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(pitchEGlevel * 2.43));
@@ -1718,16 +2191,19 @@ void writeDACs() {
           setVoltage(CHIP_SEL1, 0, 1, int(filterRelease * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(filterSustain * 2.43));
           break;
+
         case 9:  // 5Volt
           setVoltage(CHIP_SEL1, 0, 1, int(filterDecay * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(filterAttack * 2.43));
           break;
+
         case 10:  // 5Volt
           setVoltage(CHIP_SEL1, 0, 1, int(LfoRate * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(lfoMult * 2.43));
           break;
+
         case 11:  // 5Volt
-          setVoltage(CHIP_SEL1, 0, 1, int(LFOWaveform * 2.43));
+          setVoltage(CHIP_SEL1, 0, 1, int(LFOWaveform * 2.45));
           setVoltage(CHIP_SEL1, 1, 1, int(LfoDelay * 2.43));
           break;
 
@@ -1735,14 +2211,17 @@ void writeDACs() {
           setVoltage(CHIP_SEL1, 0, 1, int(osc2MainWave * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(osc1MainWave * 2.43));
           break;
+
         case 13:  // 5Volt
           setVoltage(CHIP_SEL1, 0, 1, int(filterEGlevel * 2.43));
           setVoltage(CHIP_SEL1, 1, 1, int(GlideTime * 2.43));
           break;
+
         case 14:  // 5Volt
           setVoltage(CHIP_SEL1, 0, 1, 0);
           setVoltage(CHIP_SEL1, 1, 1, int(LfoSlope * 2.43));
           break;
+
         case 15:  // 10Volt
           setVoltage(CHIP_SEL1, 0, 1, int(filterCutoff * 1.5));
           setVoltage(CHIP_SEL1, 1, 1, int(filterRes * 1.5));
@@ -1766,16 +2245,19 @@ void writeDACs() {
           setVoltage(CHIP_SEL2, 0, 1, int(osc1SubWave * 2.43));
           setVoltage(CHIP_SEL2, 1, 1, int(osc2SubWave * 2.43));
           break;
+
         case 1:  // 5Volt
           setVoltage(CHIP_SEL2, 0, 1, int(bitCrush * 2.43));
           setVoltage(CHIP_SEL2, 1, 1, int(0));
           break;
+
         case 2:  // 5Volt
-          setVoltage(CHIP_SEL2, 0, 1, int(0));
-          setVoltage(CHIP_SEL2, 1, 1, int(0));
+          setVoltage(CHIP_SEL2, 0, 1, int(pot1 * 1.6));
+          setVoltage(CHIP_SEL2, 1, 1, int(pot2 * 1.6));
           break;
+
         case 3:  // 5Volt
-          setVoltage(CHIP_SEL2, 0, 1, int(0));
+          setVoltage(CHIP_SEL2, 0, 1, int(pot3 * 1.6));
           setVoltage(CHIP_SEL2, 1, 1, int(0));
           break;
 
@@ -1783,14 +2265,17 @@ void writeDACs() {
           setVoltage(CHIP_SEL2, 0, 1, int(pitchAttack * 2.43));
           setVoltage(CHIP_SEL2, 1, 1, int(pitchDecay * 2.43));
           break;
+
         case 5:  // 5Volt
           setVoltage(CHIP_SEL2, 0, 1, int(pitchSustain * 2.43));
           setVoltage(CHIP_SEL2, 1, 1, int(pitchRelease * 2.43));
           break;
+
         case 6:  // 5Volt
           setVoltage(CHIP_SEL2, 0, 1, int(ampAttack * 2.43));
           setVoltage(CHIP_SEL2, 1, 1, int(ampDecay * 2.43));
           break;
+
         case 7:  // 5Volt
           setVoltage(CHIP_SEL2, 0, 1, int(ampSustain * 2.43));
           setVoltage(CHIP_SEL2, 1, 1, int(ampRelease * 2.43));
@@ -1890,9 +2375,19 @@ void onButtonPress(uint16_t btnIndex, uint8_t btnType) {
     myControlChange(midiChannel, CClfoDestVCA, lfoDestVCA);
   }
 
-  if (btnIndex == MULTI_SW && btnType == ROX_PRESSED) {
+  if (btnIndex == MULTI_SW && btnType == ROX_RELEASED) {
     monoMulti = !monoMulti;
     myControlChange(midiChannel, CCmonoMulti, monoMulti);
+  } else if (btnIndex == MULTI_SW && btnType == ROX_HELD) {
+    effects = !effects;
+    if (effects) {
+      srpanel.set(EFFECT_LED, HIGH);
+      srpanel.set(LFO_LED, LOW);
+    } else {
+      srpanel.set(EFFECT_LED, LOW);
+      srpanel.set(LFO_LED, HIGH);
+    }
+    myControlChange(midiChannel, CCeffects, effects);
   }
 
   if (btnIndex == OSC1_EG_SW && btnType == ROX_PRESSED) {
@@ -2167,7 +2662,7 @@ void showSettingsPage() {
 
 void loop() {
 
-  octoswitch.update();
+  octoswitch.update(500);
   srp.update();
 
   checkMux();

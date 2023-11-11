@@ -5,6 +5,21 @@ boolean encCW = true;//This is to set the encoder to increment when turned CW - 
 int resolutionFrig = 3;
 int bankselect = 0;
 
+int pot1 = 0;
+int pot2 = 0;
+int pot3 = 0;
+int effectNumber = 0;
+int mix = 0;
+int mixa = 0;
+int mixb = 0;
+int pot1str = 0;
+int pot2str = 0;
+int pot3str = 0;
+int effectNumberstr = 0;
+int mixstr = 0;
+int internal = 0;
+String FV1effect = "                ";
+
 int noiseLevel = 0;
 int noiseLevelstr = 0; // for display
 int volumeControl = 0;
@@ -33,6 +48,7 @@ int lfoVCO = 0;
 int lfoVCF = 0;
 int lfoVCA = 0;
 int monoMulti = 0;
+boolean effects = false;
 
 int pitchBendRange = 8;
 int PitchBendLevel = 0;

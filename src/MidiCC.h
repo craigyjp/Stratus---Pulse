@@ -38,6 +38,13 @@
 #define   CCfilterPole 51
 #define   CCfilterLoop  52
 #define   CCfilterEG  53
+#define   CCeffects  54
+#define   CCpot1 55
+#define   CCpot2 56
+#define   CCpot3 57
+#define   CCeffectNumber 58
+#define   CCmix 59
+#define   CCinternal 60
 #define   CCPitchBend 65
 #define   CCLfoSlope 66
 #define   CCAmplevel  67

@@ -100,6 +100,8 @@ ADC *adc = new ADC();
 #define OCTAVE2_LED 15
 #define OSC2_EG_LED 16
 #define UNISON_LED 17
+#define LFO_LED 18
+#define EFFECT_LED 19
 
 //74HC595 +5v OUTPUTS
 
@@ -134,6 +136,10 @@ ADC *adc = new ADC();
 #define PLUS 26
 #define MINUS 25
 #define FILTER_ENV_OUT 27
+#define EFFECT_S0 28
+#define EFFECT_S1 29
+#define EFFECT_S2 30
+#define INT_EXT 31
 
 // System controls
 
