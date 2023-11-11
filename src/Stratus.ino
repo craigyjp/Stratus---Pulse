@@ -126,6 +126,7 @@ void setup() {
   srp.begin(OUT_DATA, OUT_CLK, OUT_LATCH);
   srpanel.set(EFFECT_LED, LOW);
   srpanel.set(LFO_LED, HIGH);
+  srp.writePin(SIGNAL_MUTE, LOW);
   recallPatch(patchNo);  //Load first patch
 }
 
@@ -1072,7 +1073,7 @@ void updateLfoDepth() {
 }
 
 void updatePitchBend() {
-  showCurrentParameterPage("Bender Range", int(PitchBendLevelstr));
+  showCurrentParameterPage("Bender Range", PitchBendLevelstr);
 }
 
 void updatemodWheel() {
@@ -1719,8 +1720,44 @@ void myControlChange(byte channel, byte control, int value) {
       break;
 
     case CCPitchBend:
+      PitchBendLevelstr = map(value, 0, 1023, 0, 7);
       PitchBendLevel = value;
-      PitchBendLevelstr = PITCHBEND[value / 8];  // for display
+
+      switch(PitchBendLevelstr) {
+        
+        case 0:
+        PitchBendLevel = 0;
+        break;
+
+        case 1:
+        PitchBendLevel = 242;
+        break;
+
+        case 2:
+        PitchBendLevel = 307;
+        break;
+
+        case 3:
+        PitchBendLevel = 361;
+        break;
+
+        case 4:
+        PitchBendLevel = 432;
+        break;
+
+        case 5:
+        PitchBendLevel = 489;
+        break;
+
+        case 6:
+        PitchBendLevel = 560;
+        break;
+
+        case 7:
+        PitchBendLevel = 625;
+        break;
+
+      }
       updatePitchBend();
       break;
 
@@ -1823,18 +1860,7 @@ void myProgramChange(byte channel, byte program) {
 
 void recallPatch(int patchNo) {
   allNotesOff();
-  digitalWriteFast(DEMUX_S0, 0);
-  digitalWriteFast(DEMUX_S1, 0);
-  digitalWriteFast(DEMUX_S2, 1);
-  digitalWriteFast(DEMUX_S3, 1);
-  setVoltage(CHIP_SEL1, 0, 1, 0);  // waves
-  setVoltage(CHIP_SEL1, 1, 1, 0);
-  digitalWriteFast(DEMUX_S0, 0);
-  digitalWriteFast(DEMUX_S1, 0);
-  digitalWriteFast(DEMUX_S2, 0);
-  digitalWriteFast(DEMUX_S3, 0);
-  setVoltage(CHIP_SEL2, 0, 1, 0);  // sub waves
-  setVoltage(CHIP_SEL2, 1, 1, 0);
+  srp.writePin(SIGNAL_MUTE, LOW);
 
   File patchFile = SD.open(String(patchNo).c_str());
   if (!patchFile) {
@@ -1846,6 +1872,8 @@ void recallPatch(int patchNo) {
     patchFile.close();
     storeLastPatch(patchNo);
   }
+  //srp.writePin(SIGNAL_MUTE, HIGH);
+  unmuteDelay = 0;
 }
 
 void setCurrentPatchData(String data[]) {
@@ -1973,10 +2001,6 @@ String getCurrentPatchData() {
          + "," + String(filterEG) + "," + String(ampEG) + "," + String(pitchVelo) + "," + String(filterVelo) + "," + String(FilterEnvPatch)
          + "," + String(effectNumber) + "," + String(pot1) + "," + String(pot2) + "," + String(pot3) + "," + String(mixa) + "," + String(mixb) + "," + String(internal);
 }
-
-
-
-
 
 void checkMux() {
 
@@ -2673,4 +2697,11 @@ void loop() {
 
   usbMIDI.read(midiChannel);  //USB Client MIDI
   MIDI.read(midiChannel);     //MIDI 5 Pin DIN
+
+  if (millis() - unmuteDelay >= delayInterval) {
+    // Reset the timer for the next iteration
+    unmuteDelay = millis();
+
+    srp.writePin(SIGNAL_MUTE, HIGH);
+  }
 }

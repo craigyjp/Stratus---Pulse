@@ -135,7 +135,7 @@ ADC *adc = new ADC();
 #define OCTAVE 24
 #define PLUS 26
 #define MINUS 25
-#define FILTER_ENV_OUT 27
+#define SIGNAL_MUTE 27
 #define EFFECT_S0 28
 #define EFFECT_S1 29
 #define EFFECT_S2 30

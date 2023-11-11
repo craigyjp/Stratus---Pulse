@@ -4,6 +4,8 @@ String patchName = INITPATCHNAME;
 boolean encCW = true;//This is to set the encoder to increment when turned CW - Settings Option
 int resolutionFrig = 3;
 int bankselect = 0;
+unsigned long unmuteDelay = 0;
+const unsigned long delayInterval = 1000;  // 50ms delay
 
 int pot1 = 0;
 int pot2 = 0;
