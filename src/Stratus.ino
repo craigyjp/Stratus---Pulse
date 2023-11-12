@@ -1226,34 +1226,42 @@ void updateStratusLFOWaveform() {
       switch (LFOWaveformstr) {
         case 0:
           StratusLFOWaveform = "Saw +Oct";
+          LFOWaveform = 0;
           break;
 
         case 1:
           StratusLFOWaveform = "Quad Saw";
+          LFOWaveform = 150;
           break;
 
         case 2:
           StratusLFOWaveform = "Quad Pulse";
+          LFOWaveform = 300;
           break;
 
         case 3:
           StratusLFOWaveform = "Tri Step";
+          LFOWaveform = 450;
           break;
 
         case 4:
           StratusLFOWaveform = "Sine +Oct";
+          LFOWaveform = 600;
           break;
 
         case 5:
           StratusLFOWaveform = "Sine +3rd";
+          LFOWaveform = 725;
           break;
 
         case 6:
           StratusLFOWaveform = "Sine +4th";
+          LFOWaveform = 850;
           break;
 
         case 7:
           StratusLFOWaveform = "Rand Slopes";
+          LFOWaveform = 1023;
           break;
       }
       break;
@@ -1262,34 +1270,42 @@ void updateStratusLFOWaveform() {
       switch (LFOWaveformstr) {
         case 0:
           StratusLFOWaveform = "Sawtooth Up";
+          LFOWaveform = 0;
           break;
 
         case 1:
           StratusLFOWaveform = "Sawtooth Down";
+          LFOWaveform = 150;
           break;
 
         case 2:
           StratusLFOWaveform = "Squarewave";
+          LFOWaveform = 300;
           break;
 
         case 3:
           StratusLFOWaveform = "Triangle";
+          LFOWaveform = 450;
           break;
 
         case 4:
           StratusLFOWaveform = "Sinewave";
+          LFOWaveform = 575;
           break;
 
         case 5:
           StratusLFOWaveform = "Sweeps";
+          LFOWaveform = 725;
           break;
 
         case 6:
           StratusLFOWaveform = "Lumps";
+          LFOWaveform = 850;
           break;
 
         case 7:
           StratusLFOWaveform = "Sample & Hold";
+          LFOWaveform = 1023;
           break;
       }
       break;
@@ -1724,7 +1740,7 @@ void myControlChange(byte channel, byte control, int value) {
       PitchBendLevel = value;
 
       switch(PitchBendLevelstr) {
-        
+
         case 0:
         PitchBendLevel = 0;
         break;
@@ -1810,7 +1826,7 @@ void myControlChange(byte channel, byte control, int value) {
       break;
 
     case CCLFOWaveform:
-      LFOWaveform = value;
+      //LFOWaveform = value;
       LFOWaveformstr = map(value, 0, 1023, 0, 7);
       updateStratusLFOWaveform();
       break;
@@ -2227,7 +2243,7 @@ void writeDACs() {
           break;
 
         case 11:  // 5Volt
-          setVoltage(CHIP_SEL1, 0, 1, int(LFOWaveform * 2.45));
+          setVoltage(CHIP_SEL1, 0, 1, int(LFOWaveform * 2.41));
           setVoltage(CHIP_SEL1, 1, 1, int(LfoDelay * 2.43));
           break;
 
